@@ -54,7 +54,7 @@ $showPosts = $showPostsSql->fetchAll();
             <div class="text-inner d-flex align-items-center">
               <div class="content">
                 <header class="post-header">
-                  <div class="category"><a href="#"><?php echo $category['name'] ?></a></div><a href="post.html">
+                  <div class="category"><a href="post.php?id=<?php echo $post['post_id']; ?>"><?php echo $category['name'] ?></a></div><a href="post.php?id=<?php echo $post['post_id']; ?>">
                     <h2 class="h4"><?php echo $post['title'] ?></h2>
                   </a>
                 </header>
@@ -65,6 +65,7 @@ $showPosts = $showPostsSql->fetchAll();
             $showUser = $showUserSQL->fetchAll();
 
             foreach ($showUser as $user) :
+            //to fix
             endforeach;
 
 
