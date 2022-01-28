@@ -3,7 +3,7 @@
 $serverName = 'localhost';
 $userName = 'root';
 $password = '';
-$dataBase = 'user';
+$dataBase = 'blog_db';
 try {
 
 $conn = new PDO('mysql:host=' . $serverName . ';
@@ -19,4 +19,3 @@ PDO::ERRMODE_EXCEPTION);
 echo 'Error: ' . $e->getMessage();
 
 }
-?>

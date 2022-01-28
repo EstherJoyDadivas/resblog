@@ -1,4 +1,10 @@
-<?php include('templates/header.php'); ?>
+<?php include('templates/header.php');
+
+$showPostsSql = $conn->prepare("SELECT * FROM post ORDER BY post_id DESC LIMIT 3");
+$showPostsSql->execute();
+$showPosts = $showPostsSql->fetchAll();
+
+?>
 <!-- Hero Section-->
 <section style="background: url(img/hero.jpg); background-size: cover; background-position: center center" class="hero">
   <div class="container">
@@ -22,78 +28,70 @@
 </section>
 <section class="featured-posts no-padding-top">
   <div class="container">
-    <!-- Post-->
-    <div class="row d-flex align-items-stretch">
-      <div class="text col-lg-7">
-        <div class="text-inner d-flex align-items-center">
-          <div class="content">
-            <header class="post-header">
-              <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="post.html">
-                <h2 class="h4">Alberto Savoia Can Teach You About Interior</h2>
-              </a>
-            </header>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-            <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid"></div>
-                <div class="title"><span>John Doe</span></div>
-              </a>
-              <div class="date"><i class="icon-clock"></i> 2 months ago</div>
-              <div class="comments"><i class="icon-comment"></i>12</div>
-            </footer>
+    <!-- POST -->
+    <?php
+    foreach ($showPosts as $post) {
+      $string = $post['content'];
+      $string = strip_tags($string);
+      if (strlen($string) > 150) {
+
+        // truncate string
+        $stringCut = substr($string, 0, 150);
+        $endPoint = strrpos($stringCut, ' ');
+
+        $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+        $string .= '... <a href="#">Read More</a>';
+      }
+      $showCategorySQL = $conn->prepare("SELECT name FROM category where category_id = '$post[category_id]'");
+      $showCategorySQL->execute();
+      $showCategory = $showCategorySQL->fetchAll();
+
+      foreach ($showCategory as $category) :
+    ?>
+        <div class="row d-flex align-items-stretch">
+          <div class="image col-lg-5"><img src="upload/<?php echo $post['file_name'] ?>" alt="..."></div>
+          <div class="text col-lg-7">
+            <div class="text-inner d-flex align-items-center">
+              <div class="content">
+                <header class="post-header">
+                  <div class="category"><a href="#"><?php echo $category['name'] ?></a></div><a href="post.html">
+                    <h2 class="h4"><?php echo $post['title'] ?></h2>
+                  </a>
+                </header>
+              <?php
+            endforeach;
+            $showUserSQL = $conn->prepare("SELECT full_name FROM user where user_id = '$post[user_id]'");
+            $showUserSQL->execute();
+            $showUser = $showUserSQL->fetchAll();
+
+            foreach ($showUser as $user) :
+            endforeach;
+
+
+              ?>
+              <p><?php echo $string; ?></p>
+              <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                  <div class="avatar"><img src="img/avatar-2.jpg" alt="..." class="img-fluid"></div>
+                  <div class="title"><span>Author</span></div>
+                </a>
+                <div class="date"><i class="icon-clock"></i> <?php echo $post['date'] ?></div>
+                <div class="comments"><i class="icon-comment"></i>12</div>
+              </footer>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="image col-lg-5"><img src="img/featured-pic-1.jpeg" alt="..."></div>
-    </div>
-    <!-- Post        -->
-    <div class="row d-flex align-items-stretch">
-      <div class="image col-lg-5"><img src="img/featured-pic-2.jpeg" alt="..."></div>
-      <div class="text col-lg-7">
-        <div class="text-inner d-flex align-items-center">
-          <div class="content">
-            <header class="post-header">
-              <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="post.html">
-                <h2 class="h4">Alberto Savoia Can Teach You About Interior</h2>
-              </a>
-            </header>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-            <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                <div class="avatar"><img src="img/avatar-2.jpg" alt="..." class="img-fluid"></div>
-                <div class="title"><span>John Doe</span></div>
-              </a>
-              <div class="date"><i class="icon-clock"></i> 2 months ago</div>
-              <div class="comments"><i class="icon-comment"></i>12</div>
-            </footer>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Post                            -->
-    <div class="row d-flex align-items-stretch">
-      <div class="text col-lg-7">
-        <div class="text-inner d-flex align-items-center">
-          <div class="content">
-            <header class="post-header">
-              <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="post.html">
-                <h2 class="h4">Alberto Savoia Can Teach You About Interior</h2>
-              </a>
-            </header>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-            <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                <div class="avatar"><img src="img/avatar-3.jpg" alt="..." class="img-fluid"></div>
-                <div class="title"><span>John Doe</span></div>
-              </a>
-              <div class="date"><i class="icon-clock"></i> 2 months ago</div>
-              <div class="comments"><i class="icon-comment"></i>12</div>
-            </footer>
-          </div>
-        </div>
-      </div>
-      <div class="image col-lg-5"><img src="img/featured-pic-3.jpeg" alt="..."></div>
-    </div>
-  </div>
+      <?php
+    }
+
+    print_r($user);
+    echo $user['full_name'];
+      ?>
 </section>
 <!-- Divider Section-->
+<?php
+
+?>
 <section style="background: url(img/divider-bg.jpg); background-size: cover; background-position: center bottom" class="divider">
   <div class="container">
     <div class="row">

@@ -1,4 +1,7 @@
-<?php include('templates/header.php'); ?>
+<?php include('templates/header.php');
+
+
+?>
 <div class="container">
   <div class="row">
     <!-- Latest Posts -->
@@ -165,11 +168,11 @@
         <header>
           <h3 class="h6">Categories</h3>
         </header>
-        <div class="item d-flex justify-content-between"><a href="#">Growth</a><span>12</span></div>
-        <div class="item d-flex justify-content-between"><a href="#">Local</a><span>25</span></div>
-        <div class="item d-flex justify-content-between"><a href="#">Sales</a><span>8</span></div>
-        <div class="item d-flex justify-content-between"><a href="#">Tips</a><span>17</span></div>
-        <div class="item d-flex justify-content-between"><a href="#">Local</a><span>25</span></div>
+        <div class="item d-flex justify-content-between"><a href="#">Growth</a><span></span></div>
+        <div class="item d-flex justify-content-between"><a href="#">Local</a><span></span></div>
+        <div class="item d-flex justify-content-between"><a href="#">Sales</a><span></span></div>
+        <div class="item d-flex justify-content-between"><a href="#">Tips</a><span></span></div>
+        <div class="item d-flex justify-content-between"><a href="#">Local</a><span></span></div>
       </div>
       <!-- Widget [Tags Cloud Widget]-->
       <div class="widget tags">
