@@ -17,9 +17,9 @@
 						<form name="login-form" action="validateLogin.php" method="POST">
 							<fieldset>
 									<div class="form-group" style="margin-top:10px; padding: 20px;">
-										<div class="col-sm-4 col-md-offset-1">Enter Your Username</div>
+										<div class="col-sm-4 col-md-offset-1">Enter Your Email</div>
 										<div class="col-sm-6">
-										<input type="username" name="username" class="form-control"/></div>
+										<input type="email" name="email" class="form-control"/></div>
 									</div>
 									
 									<div class="form-group" style="margin-top:10px; padding: 20px;">

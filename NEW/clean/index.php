@@ -63,7 +63,7 @@ require('db_connection.php'); ?>
         <div class="row">
             <div class="col-lg-12">	
 			<div style="margin-top:60px;margin-bottom:80px">
-				<h2>Put Viewers content here</h2>
+				<h2>Put Viewers content here or what ever your plans are</h2>
 				
 				<?php } ?>
             </div>

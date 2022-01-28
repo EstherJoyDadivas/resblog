@@ -1,27 +1,26 @@
 <?php
 
 		require ("db_connection.php");
-		$username = $_POST['username'];
+		$email = $_POST['email'];
 		$password = $_POST['password'];
 
-		$usersql = $conn->prepare ("Select * from users where username =
-		'$username' AND password = '$password'");
+		$usersql = $conn->prepare ("Select * from user where email = '$email' AND password = '$password'");
 
 	$usersql->execute();
 	$user = $usersql->fetch();
-	if ($user) {
-		if ($user['role'] == 'admin') {
+	if ($email) {
+		if ($email['role'] == 'admin') {
 			echo "
 			<script>
 				alert ('WELCOME ADMIN');
 			</script> ";
-			header('Location: showUsers.php');
+			header('Location: admin/index.php'); //sample 
 		}
-		else if ($user['role'] == 'user') {
+		else if ($user['role'] !== 'admin') {
 			"<script>
 				alert ('WELCOME USER');
 			</script> ";
-			header('Location: editProfileOwn.php?id='.$user['userid']);		
+			header('Location: user/index.php?id='.$user['userid']);		
 		} else {
 			"<script>
 				alert ('No Records Found');
